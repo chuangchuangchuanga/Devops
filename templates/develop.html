@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <form action="/develop/" method="post" >
+         {% csrf_token %}
+        <input type="text" name="domain" >
+        <button type="submit">提交</button>
+        </form>
+    </div>
+    <div>
+        <table  width="500">
+            <tr>
+            <th>doamin</th>
+            <th>状态</th>
+            </tr>
+            <tr>
+                <td>{{ p.domain }}</td>
+                <td>{{ p.id }}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
