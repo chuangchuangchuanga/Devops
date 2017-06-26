@@ -18,10 +18,12 @@
             <th>doamin</th>
             <th>状态</th>
             </tr>
+            {% for i in p %}
             <tr>
-                <td>{{ p.domain }}</td>
-                <td>{{ p.id }}</td>
+                <td>{{ i.domain }}</td>
+                <td><a href="/developissue/{{ i.id }}">修改</a></td>
             </tr>
+            {% endfor %}
         </table>
     </div>
 </body>

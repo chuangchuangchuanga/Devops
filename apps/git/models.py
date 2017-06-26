@@ -7,10 +7,10 @@ from django.db import models
 
 class ipadd_path(models.Model):
     domain = models.CharField(max_length=50)
-    devipadd = models.GenericIPAddressField()
-    devpath = models.CharField(max_length=50)
-    productionipadd = models.GenericIPAddressField()
-    productionpath = models.CharField(max_length=50)
+    devipadd = models.GenericIPAddressField(null=True)
+    devpath = models.CharField(max_length=50, blank=True)
+    productionipadd = models.GenericIPAddressField(null=True)
+    productionpath = models.CharField(max_length=50, blank=True)
 
     def __unicode__(self):
-        return self.domain
+        return self.domainl
