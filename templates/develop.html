@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'master/html.html' %}
+
+{% block content %}
     <div>
         <form action="/develop/" method="post" >
          {% csrf_token %}
@@ -26,5 +22,4 @@
             {% endfor %}
         </table>
     </div>
-</body>
-</html>
+{% endblock %}

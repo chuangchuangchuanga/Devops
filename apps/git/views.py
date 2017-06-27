@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 from .models import ipadd_path
-
+from .script import fun
 
 # Create your views here.
 
@@ -28,4 +28,5 @@ def developissue(requests, id):
         reset = requests.POST['reset']
         ip_path = ipadd_path.objects.get(id=id)
         print ip_path.devipadd, ip_path.devpath, reset
+        fun(ip_path.devipadd, ipadd_path, reset)
         return render_to_response('developissue.html')

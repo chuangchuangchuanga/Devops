@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'master/html.html' %}
+
+{% block content %}
 <div>
     <form action="/developissue/{{ id }}/" method="post">
         <input type="text" name="reset">
         <button type="submit">提交</button>
     </form>
 </div>
-</body>
-</html>
+{% endblock %}
