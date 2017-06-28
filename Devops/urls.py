@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^develop/$', views.develop),
     url(r'^developissue/(?P<id>[0-9]+)/$', views.developissue),
+    url(r'^login/$', views.login_site, name='login'),
+    url(r'^logout/$', views.logout_site, name='logout'),
 ]

@@ -4,7 +4,6 @@ from django.db import models
 
 # Create your models here.
 
-
 class ipadd_path(models.Model):
     domain = models.CharField(max_length=50)
     devipadd = models.GenericIPAddressField(null=True)
@@ -13,4 +12,4 @@ class ipadd_path(models.Model):
     productionpath = models.CharField(max_length=50, blank=True)
 
     def __unicode__(self):
-        return self.domainl
+        return self.domain
