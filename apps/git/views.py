@@ -8,6 +8,8 @@ from .models import ipadd_path
 from .script import fun
 
 # Create your views here.
+
+
 @csrf_exempt
 def develop(requests):
     if requests.method == 'GET':

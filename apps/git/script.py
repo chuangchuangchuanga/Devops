@@ -14,7 +14,7 @@ def fun(ipadd, path, reset):
     s.load_system_host_keys()
     s.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     s.connect(ipadd, 22, user, passwd, timeout=5)
-    if reset == 'updata':
+    if reset == 'update':
         stdin, stdout, stderr = s.exec_command('cd %s ;sudo git fetch origin master; sudo git merge origin/master' %path, get_pty=True)
     else:
         stdin, stdout, stderr = s.exec_command('cd %s ;sudo git reset --hard %s' %(path,reset), get_pty=True)
