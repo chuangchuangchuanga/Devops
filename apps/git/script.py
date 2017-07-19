@@ -2,13 +2,15 @@
 import sys, os
 import paramiko
 
-# ipadd = sys.argv[1]
-# path = sys.argv[2]
-# reset = sys.argv[3]
+
+sys.path.append('.')
+
+from user_and_passwd import *
+
 
 def fun(ipadd, path, reset):
-    user = 'git'
-    passwd = '123456'
+    user = users
+    passwd = password
 
     s = paramiko.SSHClient()
     s.load_system_host_keys()
@@ -22,4 +24,3 @@ def fun(ipadd, path, reset):
     for line in cmd_result:
          print line
     s.close()
-#    print cmd_result

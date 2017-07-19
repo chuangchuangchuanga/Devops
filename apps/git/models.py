@@ -5,11 +5,16 @@ from django.db import models
 # Create your models here.
 
 class ipadd_path(models.Model):
-    domain = models.CharField(max_length=50)
-    devipadd = models.GenericIPAddressField(null=True)
-    devpath = models.CharField(max_length=50, blank=True)
-    productionipadd = models.GenericIPAddressField(null=True)
-    productionpath = models.CharField(max_length=50, blank=True)
+    Domain = models.CharField(max_length=50)
+    Ipadd = models.GenericIPAddressField()
+    Ccshoppath = models.CharField(max_length=50, blank=True)
+    Themespath = models.CharField(max_length=50, blank=True)
+
 
     def __unicode__(self):
-        return self.domain
+        return self.Domain
+
+
+class log(models.Model):
+    Domain = models.CharField(max_length=50)
+    info = models.CharField(max_length=300)

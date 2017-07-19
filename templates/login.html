@@ -1,7 +1,7 @@
-{% extends 'master/html.html' %}
-
-{% block content %}
-    <style>
+<html>
+<head>
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<style>
     body {
   background-color: #eee;
 }
@@ -41,6 +41,8 @@
   border-top-right-radius: 0;
 }
     </style>
+</head>
+<body>
 <div class="container">
       <form class="form-signin" method="post" action="{% url 'login' %}">
            {% csrf_token %}
@@ -56,4 +58,5 @@
            <span style="color: red" >{{ login_err }}</span>
       </form>
 </div>
-{% endblock %}
+</body>
+</html>

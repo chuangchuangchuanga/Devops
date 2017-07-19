@@ -82,6 +82,9 @@ DATABASES = {
         'USER': 'devops',
         'PASSWORD': '123456',
         'HOST': '127.0.0.1',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
@@ -126,3 +129,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join('static'),
 )
+
+LOGIN_URL = '/login/'

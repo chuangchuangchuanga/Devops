@@ -12,12 +12,14 @@
         <table  width="500">
             <tr>
             <th>doamin</th>
-            <th>状态</th>
+            <th>ccshop</th>
+            <th>thems</th>
             </tr>
             {% for i in p %}
             <tr>
-                <td>{{ i.domain }}</td>
-                <td><a href="/developissue/{{ i.id }}">提交</a></td>
+                <td>{{ i.Domain }}</td>
+                <td><a href="/ccshop/{{ i.id }}">提交</a></td>
+                <td><a href="/templates/{{ i.id }}">提交</a></td>
             </tr>
             {% endfor %}
         </table>
