@@ -48,6 +48,7 @@ def templates(requests, id):
         return render_to_response('templates.html', locals())
     else:
         reset = requests.POST['reset']
+        ip_path = ipadd_path.objects.get(id=id)
         fun(ip_path.Ipadd, ip_path.Themespath, reset)
         return HttpResponseRedirect('/templates/%s' % id)
 
