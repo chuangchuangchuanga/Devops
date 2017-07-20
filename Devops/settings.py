@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.git'
+    'git'
 ]
 
 MIDDLEWARE = [
@@ -131,4 +131,4 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_URL = '/login/'
-STATIC_ROOT = 'static/'
+STATIC_ROOT = '/static/'
