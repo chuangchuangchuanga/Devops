@@ -131,4 +131,4 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_URL = '/login/'
-STATIC_ROOT = 'static'
+STATIC_ROOT = 'static/'
