@@ -3,9 +3,9 @@ import sys, os
 import paramiko
 
 
-sys.path.append('.')
 
-from user_and_passwd import *
+
+from .user_and_passwd import *
 
 
 def fun(ipadd, path, reset):
