@@ -101,5 +101,3 @@ ENV/
 .mypy_cache/
 .idea/
 migrations/
-apps/git/user_and_passwd.py
-/Devops/settings.py
