@@ -102,4 +102,4 @@ ENV/
 .idea/
 migrations/
 apps/git/user_and_passwd.py
-settings.py
+/Devops/settings.py
