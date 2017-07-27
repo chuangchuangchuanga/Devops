@@ -16,7 +16,7 @@ def index(requests):
     return render_to_response('index.html')
 
 
-@login_required
+#@login_required
 @csrf_exempt
 def develop(requests):
     if requests.method == 'GET':

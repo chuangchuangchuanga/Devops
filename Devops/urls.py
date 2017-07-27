@@ -15,14 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from git import views
+from git import views as git_view
+from cleancache import views as cleancache_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index),
-    url(r'^develop/$', views.develop),
-    url(r'^ccshop/(?P<id>[0-9]+)/$', views.ccshopissue),
-    url(r'^templates/(?P<id>[0-9]+)/$', views.templates),
-    url(r'^login/$', views.login_site, name='login'),
-    url(r'^logout/$', views.logout_site, name='logout'),
+    url(r'^$', git_view.index),
+    url(r'^develop/$', git_view.develop),
+    url(r'^ccshop/(?P<id>[0-9]+)/$', git_view.ccshopissue),
+    url(r'^templates/(?P<id>[0-9]+)/$', git_view.templates),
+    url(r'^login/$', git_view.login_site, name='login'),
+    url(r'^logout/$', git_view.logout_site, name='logout'),
+    url(r'^searchdomain/$', cleancache_view.searchdomain, name='searchdomain'),
+    url(r'^cleancache/(?P<id>[0-9]+)/$', cleancache_view.cleancache, name='cleancache'),
 ]

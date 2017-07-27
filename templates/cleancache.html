@@ -1,0 +1,56 @@
+{% extends 'master/html.html' %}
+
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<style type="text/css">
+    #huancunzhi{ height: 200px; }
+</style>
+
+<div class="container">
+    <form action="{% url 'cleancache' %}{{ id }}" method="post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">请输入清除缓存的地址，多个回车分开</label>
+            <textarea class="form-control" rows="3" id="huancunzhi"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">清除缓存历史记录</label>
+            <ul class="list-group chong_url">
+              <li class="list-group-item"><a href="javascript:void(0)">Cras justo odio</a><span class="pull-right btn btn-xs btn-warning glyphicon glyphicon-remove"></span></li>
+              <li class="list-group-item"><a href="javascript:void(0)">Dapibus ac facilisis in</a><span class="pull-right btn btn-xs btn-warning glyphicon glyphicon-remove"></span></li>
+              <li class="list-group-item"><a href="javascript:void(0)">Morbi leo risus</a><span class="pull-right btn btn-xs btn-warning glyphicon glyphicon-remove"></span></li>
+              <li class="list-group-item"><a href="javascript:void(0)">Porta ac consectetur ac</a><span class="pull-right btn btn-xs btn-warning glyphicon glyphicon-remove"></span></li>
+              <li class="list-group-item"><a href="javascript:void(0)">Vestibulum at eros</a><span class="pull-right btn btn-xs btn-warning glyphicon glyphicon-remove"></span></li>
+            </ul>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-lg btn-primary pull-right btn_ck">清除缓存</button>
+        </div>
+    </form>
+</div>
+
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $(".btn_ck").click(function(){
+        var val_z =  $("#huancunzhi").val();
+            val_z = $("<li class='list-group-item'><a href='javascript:void(0)'>"+val_z+"</a><span class='pull-right btn btn-xs btn-warning glyphicon glyphicon-remove'></span></li>")
+        $(".chong_url").append(val_z);
+        remove_li();
+    })
+    function remove_li(){
+        $(".glyphicon-remove").bind("click",function(){
+          $(this).parent().remove();
+        });
+        $(".chong_url .list-group-item a").each(function(){
+            $(this).bind("click",function(){
+            var val_x =  $("#huancunzhi").val();
+                $("#huancunzhi").val(val_x+"\r\n"+$(this).text());
+            })
+        })
+    }
+    remove_li();
+})
+</script>
+{% endblock %}
