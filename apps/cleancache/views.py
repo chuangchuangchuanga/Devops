@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response, render
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 import requests
 import re
 
@@ -9,6 +10,7 @@ import re
 from .models import *
 
 
+@login_required
 @csrf_exempt
 def searchdomain(requests):
     if requests.method == 'GET':
@@ -19,6 +21,7 @@ def searchdomain(requests):
         return render_to_response('searchdomain.html', locals())
 
 
+@login_required
 @csrf_exempt
 def cleancache(requests, id):
     if requests.method == 'GET':
