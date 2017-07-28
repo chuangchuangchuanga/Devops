@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response, render
 from django.views.decorators.csrf import csrf_exempt
 import requests
+import re
 
 
 # Create your views here.
@@ -21,18 +22,20 @@ def searchdomain(requests):
 @csrf_exempt
 def cleancache(requests, id):
     if requests.method == 'GET':
-        return render_to_response('cleancache.html')
+        id = id
+        return render_to_response('cleancache.html', locals())
     else:
         info = cloudflareinfo.objects.get(id=id)
-        url = requests.POST = ['url']
-        zone, auth_email, auth_key = info.zone_id, info.auth_email, info.auth_key
+        url = requests.POST['url']
+        zone, auth_email, auth_key = info.zone_id, str(info.auth_email), str(info.auth_key)
         cleaninfo = clean(url, zone, auth_email, auth_key)
         return render_to_response('cleancache.html', locals())
 
 
 def clean(url, zone, auth_email, autho_key):
     api_url = "https://api.cloudflare.com/client/v4/zones/%s/purge_cache" %zone
-    headers = {'X-Auth-Email': auth_email, 'X-Auth-Key': autho_key, 'Content-Type': 'application/json'}
-    data = '{"files":[%s]}'% url
+    headers = {'X-Auth-Email': '%s' %auth_email, 'X-Auth-Key': '%s' %autho_key, 'Content-Type': 'application/json'}
+    data = '{"files":["%s"]}'% url
+
     r = requests.delete(api_url, headers = headers, data = data)
     return r.text
