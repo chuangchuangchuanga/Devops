@@ -9,6 +9,7 @@ class ipadd_path(models.Model):
     Ipadd = models.GenericIPAddressField()
     Ccshoppath = models.CharField(max_length=50, blank=True)
     Themespath = models.CharField(max_length=50, blank=True)
+    Themespath_mobile = models.CharField(max_length=50, blank=True)
 
 
     def __unicode__(self):

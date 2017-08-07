@@ -42,14 +42,26 @@ def ccshopissue(requests, id):
 
 @login_required
 @csrf_exempt
-def templates(requests, id):
+def themes(requests, id):
     if requests.method == 'GET':
         id = id
-        return render_to_response('templates.html', locals())
+        return render_to_response('themes.html', locals())
     else:
         reset = requests.POST['reset']
         ip_path = ipadd_path.objects.get(id=id)
         fun(ip_path.Ipadd, ip_path.Themespath, reset)
+        return HttpResponseRedirect('/templates/%s' % id)
+
+@login_required
+@csrf_exempt
+def themes_mobile(requests, id):
+    if requests.method == 'GET':
+        id = id
+        return render_to_response('themes.html', locals())
+    else:
+        reset = requests.POST['reset']
+        ip_path = ipadd_path.objects.get(id=id)
+        fun(ip_path.Ipadd, ip_path.Themespath_mobile, reset)
         return HttpResponseRedirect('/templates/%s' % id)
 
 
