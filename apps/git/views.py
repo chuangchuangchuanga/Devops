@@ -50,7 +50,7 @@ def themes(requests, id):
         reset = requests.POST['reset']
         ip_path = ipadd_path.objects.get(id=id)
         fun(ip_path.Ipadd, ip_path.Themespath, reset)
-        return HttpResponseRedirect('/templates/%s' % id)
+        return HttpResponseRedirect('/themes/%s' % id)
 
 @login_required
 @csrf_exempt
@@ -62,7 +62,7 @@ def themes_mobile(requests, id):
         reset = requests.POST['reset']
         ip_path = ipadd_path.objects.get(id=id)
         fun(ip_path.Ipadd, ip_path.Themespath_mobile, reset)
-        return HttpResponseRedirect('/templates/%s' % id)
+        return HttpResponseRedirect('/themesmobile/%s' % id)
 
 
 @csrf_exempt
