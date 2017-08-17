@@ -57,7 +57,7 @@ def themes(requests, id):
 def themes_mobile(requests, id):
     if requests.method == 'GET':
         id = id
-        return render_to_response('themes.html', locals())
+        return render_to_response('themes_mobile.html', locals())
     else:
         reset = requests.POST['reset']
         ip_path = ipadd_path.objects.get(id=id)
