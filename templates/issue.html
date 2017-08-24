@@ -1,0 +1,16 @@
+{% extends 'master/html.html' %}
+
+{% block content %}
+<ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a href="{% url 'develop' %}">代码发布</a></li>
+      <li class="active">{{ info.Domain }}</li>
+</ol>
+<div>
+    <form action="/{{ path }}/{{ id }}/" method="post" class="form-inline">
+        <input type="text" style="width: 500px" name="reset" class="form-control" placeholder="更新至最新版输入update，回滚请输入目标版本hard值">
+        <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+    <span style="color: red" >{{ back }}</span>
+</div>
+{% endblock %}

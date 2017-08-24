@@ -30,38 +30,39 @@ def develop(requests):
 @login_required
 @csrf_exempt
 def ccshopissue(requests, id):
+    info = ipadd_path.objects.get(id=id)
+    path = "ccshop"
     if requests.method == 'GET':
-        id = id
-        return render_to_response('ccshop.html', locals())
+        return render_to_response('issue.html', locals())
     else:
         reset = requests.POST['reset']
-        ip_path = ipadd_path.objects.get(id=id)
-        fun(ip_path.Ipadd, ip_path.Ccshoppath, reset)
+        fun(info.Ipadd, info.Ccshoppath, reset)
         return HttpResponseRedirect('/ccshop/%s' %id)
 
 
 @login_required
 @csrf_exempt
 def themes(requests, id):
+    info = ipadd_path.objects.get(id=id)
+    path = 'themes'
     if requests.method == 'GET':
-        id = id
-        return render_to_response('themes.html', locals())
+        return render_to_response('issue.html', locals())
     else:
         reset = requests.POST['reset']
-        ip_path = ipadd_path.objects.get(id=id)
-        fun(ip_path.Ipadd, ip_path.Themespath, reset)
+        fun(info.Ipadd, info.Themespath, reset)
         return HttpResponseRedirect('/themes/%s' % id)
+
 
 @login_required
 @csrf_exempt
 def themes_mobile(requests, id):
+    info = ipadd_path.objects.get(id=id)
+    path = "themesmobile"
     if requests.method == 'GET':
-        id = id
-        return render_to_response('themes_mobile.html', locals())
+        return render_to_response('issue.html', locals())
     else:
         reset = requests.POST['reset']
-        ip_path = ipadd_path.objects.get(id=id)
-        fun(ip_path.Ipadd, ip_path.Themespath_mobile, reset)
+        fun(info.Ipadd, info.Themespath_mobile, reset)
         return HttpResponseRedirect('/themesmobile/%s' % id)
 
 

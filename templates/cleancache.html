@@ -2,10 +2,15 @@
 
 
 {% block content %}
+<ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="{% url 'searchdomain' %}">搜索域名</a></li>
+    <li class="active">{{ info.domain }}</li>
+</ol>
 <div>
-    <form action="/cleancache/{{ id }}/" method="post">
-        <input type="text" style="width: 500px" name="url">
-        <button type="submit">提交</button>
+    <form action="/cleancache/{{ id }}/" method="post" class="form-inline">
+        <input type="text" style="width: 500px"  class="form-control" name="url" placeholder="请输入需要清除CDN缓存的URL">
+        <button type="submit" class="btn btn-primary">提交</button>
     </form>
     <span style="color: red" >{{ cleaninfo }}</span>
 </div>

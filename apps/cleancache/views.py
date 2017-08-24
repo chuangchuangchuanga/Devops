@@ -24,11 +24,11 @@ def searchdomain(requests):
 @login_required
 @csrf_exempt
 def cleancache(requests, id):
+    info = cloudflareinfo.objects.get(id=id)
     if requests.method == 'GET':
         id = id
         return render_to_response('cleancache.html', locals())
     else:
-        info = cloudflareinfo.objects.get(id=id)
         url = requests.POST['url']
         zone, auth_email, auth_key = info.zone_id, str(info.auth_email), str(info.auth_key)
         cleaninfo = clean(url, zone, auth_email, auth_key)

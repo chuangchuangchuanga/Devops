@@ -2,11 +2,15 @@
 
 
 {% block content %}
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li class="active"><a>清除缓存</a></li>
+</ol>
     <div>
-        <form action="{% url 'searchdomain' %}" method="post" >
+        <form action="{% url 'searchdomain' %}" method="post"  class="form-inline">
          {% csrf_token %}
-        <input type="text" name="domain" >
-        <button type="submit">提交</button>
+        <input type="text" name="domain" class="form-control" style="width: 300px" placeholder="请输入搜索的域名">
+        <button type="submit" class="btn btn-primary">搜索</button>
         </form>
     </div>
     <div>
@@ -18,7 +22,7 @@
             {% for i in p %}
             <tr>
                 <td>{{ i.domain }}</td>
-                <td><a href="/cleancache/{{ i.id }}">提交</a></td>
+                <td><a class="btn btn-info btn-xs" href="/cleancache/{{ i.id }}">提交</a></td>
             </tr>
             {% endfor %}
         </table>

@@ -33,7 +33,7 @@
 <div style="clear:both;overflow: hidden; margin-top: 51px">
     <div class="col-sm-3 col-md-2 sidebar" style="float:left;">
       <ul class="nav nav-sidebar">
-        <li><a href="/develop/">代码发布</a></li>
+        <li {% if 'develop' in request.get_full_path %} class="active" {% endif %}><a href="/develop/">{{ request.get_full_path }}代码发布</a></li>
         <li><a href="{% url 'searchdomain' %}">清除缓存</a></li>
       </ul>
     </div>
