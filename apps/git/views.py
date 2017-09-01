@@ -72,9 +72,9 @@ def login_site(requests):
         username = requests.POST.get('username')
         password = requests.POST.get('password')
         user = authenticate(username=username, password=password)
-        if user:
+        if user.is_active:
             login(requests, user)
-            return HttpResponseRedirect('/develop/')
+            return HttpResponseRedirect('/')
         else:
             return render_to_response('login.html',{'login_err': 'Please recheck your username or password!'})
     return render_to_response('login.html')
