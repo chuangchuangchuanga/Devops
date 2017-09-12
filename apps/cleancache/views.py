@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 import requests
-import re
 
 
 # Create your views here.
@@ -32,7 +32,7 @@ def cleancache(requests, id):
         url = requests.POST['url']
         zone, auth_email, auth_key = info.zone_id, str(info.auth_email), str(info.auth_key)
         cleaninfo = clean(url, zone, auth_email, auth_key)
-        return render_to_response('cleancache.html', locals())
+        return HttpResponse(cleaninfo)
 
 
 def clean(url, zone, auth_email, autho_key):
