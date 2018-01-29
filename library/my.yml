@@ -1,0 +1,6 @@
+---
+- hosts: test
+  tasks:
+  - name: command
+    copy: name=php path=/root/
+

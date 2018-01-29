@@ -33,17 +33,17 @@ class YunweiInventory(Inventory):
 
         self._vars_per_host = {}
         self._vars_per_group = {}
-        self._host_cache = {}
+        self._hosts_cache = {}
         self._pattern_dict_cache = {}
         self._group_dict_cache = {}
-        self._vars_plugins = {}
+        self._vars_plugins = []
 
         self._basedir = self.basedir()
 
         self._group_vars_files = self._find_group_vars_files(self._basedir)
         self._host_vars_files = self._find_host_vars_files(self._basedir)
 
-        self.set_playbook_basedir = None
+        self._playbook_basedir = None
         self.groups = {}
 
         self._restriction = None
@@ -111,8 +111,10 @@ class YunweiInventory(Inventory):
             if not self.parser:
                 raise AnsibleError("Unable to parse %s as an inventory source" % host_list)
 
-            else:
-                display.warning("Host file not found: %s" % to_text(host_list))
+        else:
+            display.warning("Host file not found: %s" % to_text(host_list))
+
+        self._vars_plugins = [x for x in vars_loader.all(self)]
 
 
 

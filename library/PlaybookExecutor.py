@@ -42,8 +42,8 @@ class YunweiPlaybookExecutor(PlaybookExecutor):
 class PlayBookJob(object):
     def __init__(self, playbooks,
                  host_list,
-                 ssh_user='bbs',
-                 passwords='null',
+                 ssh_user='root',
+                 passwords='123456',
                  project_name='all',
                  ack_pass=False,
                  forks=5,
@@ -125,8 +125,8 @@ class PlayBookJob(object):
         result = pb.run()
 
 if __name__ == "__main__":
-    PlayBookJob(playbooks=['xx.yml'],
-                host_list=['192.168.1.1'],
+    PlayBookJob(playbooks=['/Users/wangchuang/Devops/library/my.yml'],
+                host_list=['192.168.1.14'],
                 ssh_user= 'root',
                 project_name='test',
                 forks=20,
