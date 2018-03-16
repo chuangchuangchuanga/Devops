@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from git import views as git_view
 from cleancache import views as cleancache_view
+from ops import views as ops_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,4 +30,5 @@ urlpatterns = [
     url(r'^logout/$', git_view.logout_site, name='logout'),
     url(r'^searchdomain/$', cleancache_view.searchdomain, name='searchdomain'),
     url(r'^cleancache/(?P<id>[0-9]+)/$', cleancache_view.cleancache, name='cleancache'),
+    url(r'^opssearchdomain/$', ops_view.ops_search_domain, name='opssearchdomain')
 ]

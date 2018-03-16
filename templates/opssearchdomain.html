@@ -1,0 +1,30 @@
+{% extends 'master/html.html' %}
+
+
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li class="active"><a>网站操作</a></li>
+</ol>
+    <div>
+        <form action="{% url 'opssearchdomain' %}" method="post"  class="form-inline">
+         {% csrf_token %}
+        <input type="text" name="domain" class="form-control" style="width: 300px" placeholder="请输入搜索的域名">
+        <button type="submit" class="btn btn-primary">搜索</button>
+        </form>
+    </div>
+    <div>
+        <table width="500">
+            <tr>
+            <th>domain</th>
+            <th>info</th>
+            </tr>
+            {% for i in p %}
+            <tr>
+                <td>{{ i.domain }}</td>
+                <td><a class="btn btn-info btn-xs" href="/cleancache/{{ i.id }}">提交</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
