@@ -30,5 +30,6 @@ urlpatterns = [
     url(r'^logout/$', git_view.logout_site, name='logout'),
     url(r'^searchdomain/$', cleancache_view.searchdomain, name='searchdomain'),
     url(r'^cleancache/(?P<id>[0-9]+)/$', cleancache_view.cleancache, name='cleancache'),
-    url(r'^opssearchdomain/$', ops_view.ops_search_domain, name='opssearchdomain')
+    url(r'^opssearchdomain/$', ops_view.ops_search_domain, name='opssearchdomain'),
+    url(r'^ops_operate/(?P<id>[0-9]+)/$', ops_view.ops_operate, name='aaa'),
 ]

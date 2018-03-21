@@ -12,7 +12,7 @@ class domain_to_server(models.Model):
     Domain = models.CharField(max_length=50)
     Adderss = models.GenericIPAddressField()
     Path = models.CharField(max_length=200)
-    webtype = models.IntegerField(max_length=10, choices=website_type)
+    webtype = models.IntegerField( choices=website_type)
 
     def __unicode__(self):
         return self.Domain

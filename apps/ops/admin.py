@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 
-from .models import *
+from .models import domain_to_server
 # Register your models here.
 
-#admin.site.register()
+admin.site.register(domain_to_server)
