@@ -4,6 +4,7 @@ import json
 from django.shortcuts import render, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 
 from models import *
@@ -11,6 +12,7 @@ from tools import ssh
 
 
 # Create your views here.
+@login_required
 @csrf_exempt
 def ops_search_domain(request):
     if request.method == 'GET':
@@ -21,8 +23,9 @@ def ops_search_domain(request):
         return render_to_response('opssearchdomain.html', locals())
 
 
+@login_required
 @csrf_exempt
-def ops_operate(request, id=None):
+def ops_operate(request, id):
     info = domain_to_server.objects.get(id=id)
     if request.method == 'GET':
         return render_to_response('opsoperate.html', locals())
@@ -33,7 +36,6 @@ def ops_operate(request, id=None):
             info = json.dumps(connect.tools_git(str(info.Path), command))
             return HttpResponse(info)
         if request.POST['operate'] == 'deamon':
-            command = request.POST['command']
             connect = ssh(str(info.Adderss))
             info = json.dumps(connect.tools_deamon())
             return HttpResponse(info)

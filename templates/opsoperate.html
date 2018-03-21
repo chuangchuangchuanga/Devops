@@ -64,9 +64,9 @@
             var that_ = this;
             $(that_).attr("disabled","disabled");
                 $.ajax({
-                    url:"/ops_operate/",
+                    url:"/ops_operate/{{ info.id }}/",
                     data:{
-                        operate:"demon",
+                        operate:"deamon",
                     },
                     type:"post",
                     dataType:"json",

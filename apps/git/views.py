@@ -16,7 +16,7 @@ def index(requests):
     return render_to_response('index.html')
 
 
-#@login_required
+@login_required
 @csrf_exempt
 def develop(requests):
     if requests.method == 'GET':
@@ -66,6 +66,7 @@ def themes_mobile(requests, id):
         return HttpResponseRedirect('/themesmobile/%s' % id)
 
 
+@login_required
 @csrf_exempt
 def login_site(requests):
     if requests.method == 'POST':
