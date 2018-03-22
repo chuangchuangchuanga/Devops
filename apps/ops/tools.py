@@ -34,6 +34,6 @@ class ssh:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
-        stdin, stdout, stderr = ssh.exec_command('php {0}artisan {1}'.format(dir, command))
+        stdin, stdout, stderr = ssh.exec_command('/usr/bin/php {0}artisan {1}'.format(dir, command))
         result = re.sub(r'\n', '<br>', stdout.read())
         return result
