@@ -20,6 +20,7 @@ class ssh:
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('cd {0}; git {1}'.format(dir, command))
         result = re.sub(r'\n', '<br>', stdout.read())
+        ssh.close()
         return result
 
     def tools_deamon(self):
@@ -28,6 +29,7 @@ class ssh:
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('supervisorctl restart all')
         result = re.sub(r'\n', '<br>', stdout.read())
+        ssh.close()
         return result
 
     def tools_php_artisan(self, dir, command):
@@ -36,4 +38,6 @@ class ssh:
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('/usr/bin/php {0}artisan {1}'.format(dir, command))
         result = re.sub(r'\n', '<br>', stdout.read())
+        print stderr.read()
+        ssh.close()
         return result
