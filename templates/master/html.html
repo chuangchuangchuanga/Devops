@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ops_manage</title>
+    <link rel="icon" href="/favicon.ico">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://v3.bootcss.com/examples/dashboard/dashboard.css">
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
@@ -33,7 +34,7 @@
 <div style="clear:both;overflow: hidden; margin-top: 51px">
     <div class="col-sm-3 col-md-2 sidebar" style="float:left;">
       <ul class="nav nav-sidebar">
-        <li {% if 'develop' in request.get_full_path %} class="active" {% endif %}><a href="/develop/">{{ request.get_full_path }}代码发布</a></li>
+        <li {% if 'develop' in request.get_full_path %} class="active" {% endif %}><a href="/develop/">{{ request.get_full_path }} 代码发布</a></li>
         <li><a href="{% url 'searchdomain' %}">清除缓存</a></li>
         <li><a href="{% url 'opssearchdomain' %}">网站操作</a></li>
       </ul>
