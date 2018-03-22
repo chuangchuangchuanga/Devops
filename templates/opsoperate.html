@@ -12,23 +12,30 @@
         git操作
         </h1>
         <div class="searchBox" >
-{#            <form action="/ops_operate/{{ info.id }}/" method="post" class="form-inline">#}
             <div class="form-inline">
                 <b style="font-size: 20px;padding-right: 15px;">git</b>
                 <input type="hidden" name="operate" value="git" >
                 <input type="text" name="command" id="gitInput"  class="form-control" style="width: 300px" placeholder="请输入GIT命令">
                 <button type="button" id="searchBtn" class="btn btn-primary">提交</button>
             </div>
-{#            </form>#}
         </div>
-        <p style="margin-bottom: 40px;">
-{#            <form action="/ops_operate/" method="post" class="form-inline">#}
+        <h1>
+        php artisan操作
+        </h1>
+        <div class="searchBox" >
+            <div class="form-inline">
+                <b style="font-size: 20px;padding-right: 15px;">php artisan</b>
+                <input type="hidden" name="operate" value="php_artisan" >
+                <input type="text" name="command" id="php_artisan"  class="form-control" style="width: 300px" placeholder="请输入php artisan命令">
+                <button type="button" id="php_searchBtn" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+        <div style="margin-bottom: 40px;">
              <div class="form-inline">
                 <input type="hidden" name="operate" value="daemon" >
                 <button  type="submit" id="ops_operate" class="btn btn-primary">重启守护进程</button>
             </div>
-{#            </form>#}
-        </p>
+        </div>
     </div>
     <div class="col-lg-5 rightBox" >
         <div class="right">
@@ -81,6 +88,27 @@
                     }
                 })
             })
-
+        $("#php_searchBtn").bind("click",function () {
+            var that_ = this;
+            $(that_).attr("disabled","disabled");
+                $.ajax({
+                    url:"/ops_operate/{{ info.id }}/",
+                    data:{
+                        operate:"php_artisan",
+                        command:$("#php_artisan").val(),
+                    },
+                    type:"post",
+                    dataType:"json",
+                    success:function (data, textStatus) {
+                    $(that_).removeAttr("disabled")
+                        var nodeP = document.createElement("p");
+                        $(".right").append($(nodeP).addClass("text-success").html(data))
+                        console.log(data)
+                    },
+                    error:function (a,b) {
+                        console.log("error")
+                    }
+                })
+            })
     </script>
 {% endblock %}

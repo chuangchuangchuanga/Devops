@@ -12,7 +12,6 @@ class ssh:
     def __init__(self, host):
         self.host = host
         self.user = 'root'
-        print key_file
         self.private_key = paramiko.RSAKey.from_private_key_file(key_file)
 
     def tools_git(self, dir, command):
@@ -28,5 +27,13 @@ class ssh:
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('supervisorctl restart all')
+        result = re.sub(r'\n', '<br>', stdout.read())
+        return result
+
+    def tools_php_artisan(self, dir, command):
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
+        stdin, stdout, stderr = ssh.exec_command('php {0}artisan {1}'.format(dir, command))
         result = re.sub(r'\n', '<br>', stdout.read())
         return result

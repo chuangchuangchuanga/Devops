@@ -66,7 +66,7 @@ def themes_mobile(requests, id):
         return HttpResponseRedirect('/themesmobile/%s' % id)
 
 
-@login_required
+
 @csrf_exempt
 def login_site(requests):
     if requests.method == 'POST':
@@ -81,7 +81,7 @@ def login_site(requests):
     return render_to_response('login.html')
 
 
-@login_required
+
 def logout_site(requests):
     logout(requests)
     return render_to_response('login.html')
