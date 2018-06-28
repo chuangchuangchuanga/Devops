@@ -20,7 +20,7 @@ class ssh:
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('cd {0}; git pull'.format(dir), timeout=30)
-        if stdout.read():
+        if stdout.read:
             result = re.sub(r'\n', '<br>', stdout.read())
             ssh.close()
             return result
@@ -35,7 +35,7 @@ class ssh:
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('cd {0}; git reset --hard {1}'.format(dir, hard_code), timeout=30)
-        if stdout.read():
+        if stdout.read:
             result = re.sub(r'\n', '<br>', stdout.read())
             ssh.close()
             return result
@@ -51,7 +51,7 @@ class ssh:
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('supervisorctl restart all', timeout=30)
-        if stdout.read():
+        if stdout.read:
             result = re.sub(r'\n', '<br>', stdout.read())
             ssh.close()
             return result
@@ -66,7 +66,7 @@ class ssh:
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('/usr/bin/php {0}artisan {1}'.format(dir, artisan_option_value), timeout=30)
-        if stdout.read():
+        if stdout.read:
             result = re.sub(r'\n', '<br>', stdout.read())
             ssh.close()
             return result
@@ -81,7 +81,7 @@ class ssh:
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('cd {0}; npm dev {1}'.format(dir, npm_dev_option_value), timeout=30)
-        if stdout.read():
+        if stdout.read:
             result = re.sub(r'\n', '<br>', stdout.read())
             ssh.close()
             return result
