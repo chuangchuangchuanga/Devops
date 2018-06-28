@@ -80,7 +80,7 @@ class ssh:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
-        stdin, stdout, stderr = ssh.exec_command('cd {0}; npm dev {1}'.format(dir, npm_dev_option_value), timeout=30)
+        stdin, stdout, stderr = ssh.exec_command('cd {0}; npm run {1}'.format(dir, npm_dev_option_value), timeout=30)
         if stdout.read:
             result = re.sub(r'\n', '<br>', stdout.read())
             ssh.close()
