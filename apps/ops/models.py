@@ -8,6 +8,7 @@ class domain_to_server(models.Model):
     website_type = (
         (0, u"october"),
         (1, u"larval"),
+        (2, u"html")
     )
     Domain = models.CharField(max_length=50)
     Adderss = models.GenericIPAddressField()

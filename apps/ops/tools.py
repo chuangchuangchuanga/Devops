@@ -14,30 +14,78 @@ class ssh:
         self.user = 'root'
         self.private_key = paramiko.RSAKey.from_private_key_file(key_file)
 
-    def tools_git(self, dir, command):
+
+    def git_pull(self, dir):
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
-        stdin, stdout, stderr = ssh.exec_command('cd {0}; git {1}'.format(dir, command), timeout=30)
-        result = re.sub(r'\n', '<br>', stdout.read())
-        ssh.close()
-        return result
+        stdin, stdout, stderr = ssh.exec_command('cd {0}; git pull'.format(dir), timeout=30)
+        if stdout.read():
+            result = re.sub(r'\n', '<br>', stdout.read())
+            ssh.close()
+            return result
+        else:
+            result = re.sub(r'\n', '<br>', stderr.read())
+            ssh.close()
+            return result
 
-    def tools_deamon(self):
+
+    def git_reset_hard(self, dir, hard_code):
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
+        stdin, stdout, stderr = ssh.exec_command('cd {0}; git reset --hard {1}'.format(dir, hard_code), timeout=30)
+        if stdout.read():
+            result = re.sub(r'\n', '<br>', stdout.read())
+            ssh.close()
+            return result
+        else:
+            result = re.sub(r'\n', '<br>', stderr.read())
+            ssh.close()
+            return result
+
+
+
+    def deamon_process_restart(self):
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('supervisorctl restart all', timeout=30)
-        result = re.sub(r'\n', '<br>', stdout.read())
-        ssh.close()
-        return result
+        if stdout.read():
+            result = re.sub(r'\n', '<br>', stdout.read())
+            ssh.close()
+            return result
+        else:
+            result = re.sub(r'\n', '<br>', stderr.read())
+            ssh.close()
+            return result
 
-    def tools_php_artisan(self, dir, command):
+
+    def php_artisan_option(self, dir, artisan_option_value):
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
-        stdin, stdout, stderr = ssh.exec_command('/usr/bin/php {0}artisan {1}'.format(dir, command), timeout=30)
-        result = re.sub(r'\n', '<br>', stdout.read())
-        print stderr.read()
-        ssh.close()
-        return result
+        stdin, stdout, stderr = ssh.exec_command('/usr/bin/php {0}artisan {1}'.format(dir, artisan_option_value), timeout=30)
+        if stdout.read():
+            result = re.sub(r'\n', '<br>', stdout.read())
+            ssh.close()
+            return result
+        else:
+            result = re.sub(r'\n', '<br>', stderr.read())
+            ssh.close()
+            return result
+
+
+    def npm_dev_option(self, dir, npm_dev_option_value):
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
+        stdin, stdout, stderr = ssh.exec_command('cd {0}; npm dev {1}'.format(dir, npm_dev_option_value), timeout=30)
+        if stdout.read():
+            result = re.sub(r'\n', '<br>', stdout.read())
+            ssh.close()
+            return result
+        else:
+            result = re.sub(r'\n', '<br>', stderr.read())
+            ssh.close()
+            return result
