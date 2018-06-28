@@ -81,7 +81,8 @@
 
     <script>
 
-        function abc(id, dict) {
+        function abc(id, dict, that) {
+            $(that).attr("disabled","disabled");
             $.ajax({
                 url:"/ops_operate/" + id+ "/" ,
                 data:dict,
@@ -90,10 +91,12 @@
                 success:function (res) {
                     if(res && res != undefined){
                          $("#alert_cover").show().find(".text").html(res)
-                    }
+                    };
+                    $(that).removeAttr("disabled")
                 },
                 error:function (a, b) {
-                    console.log(b)
+                    console.log(b);
+                    $(that).removeAttr("disabled")
                 }
             })
         }
@@ -102,7 +105,7 @@
             var dict = {
                 operate:'git_pull',
             };
-            abc({{ info.id }}, dict);
+            abc({{ info.id }}, dict, this);
         })
 
         $('#git_reset').bind("click", function () {
@@ -111,7 +114,7 @@
                 operate:'git_reset_hard',
                 hard_code:git_reset_hard_value
             };
-            abc({{ info.id }}, dict)
+            abc({{ info.id }}, dict, this)
         })
 
         $('#php_artisan_option').bind("click", function () {
@@ -120,7 +123,7 @@
                 operate:'php_artisan_option',
                 artisan_code:php_artisan_option_value
             };
-            abc({{ info.id }}, dict)
+            abc({{ info.id }}, dict, this)
         })
 
         $('#npm_dev_option').bind("click", function () {
@@ -129,14 +132,14 @@
                 operate:'npm_dev_option',
                 npm_code:npm_dev_option_value
             };
-            abc({{ info.id }}, dict)
+            abc({{ info.id }}, dict, this)
         })
 
         $('#deamon_process_restart').bind('click', function () {
             var dict = {
                 operate:'deamon_process_restart',
             }
-            abc({{ info.id }}, dict)
+            abc({{ info.id }}, dict, this)
         })
         $("#alert_cover").click(function () {
             $("#alert_cover").hide()
