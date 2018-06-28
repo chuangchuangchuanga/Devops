@@ -14,7 +14,8 @@ from .models import *
 @csrf_exempt
 def searchdomain(requests):
     if requests.method == 'GET':
-        return render_to_response('searchdomain.html')
+        p = cloudflareinfo.objects.all()
+        return render_to_response('searchdomain.html', locals())
     else:
         domain = requests.POST['domain']
         p = cloudflareinfo.objects.filter(domain__icontains=domain)

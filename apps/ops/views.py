@@ -17,7 +17,8 @@ from tools import ssh
 @csrf_exempt
 def ops_search_domain(request):
     if request.method == 'GET':
-        return render_to_response('opssearchdomain.html')
+        p = domain_to_server.objects.all()
+        return render_to_response('opssearchdomain.html', locals())
     else:
         domain = request.POST['domain']
         p = domain_to_server.objects.filter(Domain__icontains=domain)
