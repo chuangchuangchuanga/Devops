@@ -46,7 +46,7 @@ def ops_operate(request, id):
 
         elif request.POST['operate'] == 'php_artisan_option':
             php_artisan_option_value = request.POST['artisan_code']
-            allow_list = ["cache:clear", "system:clear_cache key union_fetch_product_token"]
+            allow_list = ["cache:clear", "system:clear_cache key union_fetch_product_token", "migrate"]
             if php_artisan_option_value in allow_list:
                 connect = ssh(str(info.Adderss))
                 info = json.dumps(connect.php_artisan_option(str(info.Path), php_artisan_option_value))
