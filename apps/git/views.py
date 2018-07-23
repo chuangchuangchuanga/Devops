@@ -13,7 +13,7 @@ from .script import fun
 
 @login_required
 def index(requests):
-    return render_to_response('index.html')
+    return render_to_response('index.html', {'user': requests.user})
 
 
 @login_required
