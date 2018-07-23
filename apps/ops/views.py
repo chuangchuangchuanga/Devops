@@ -31,7 +31,7 @@ def ops_search_domain(request):
 def ops_operate(request, id):
     info = domain_to_server.objects.get(id=id)
     if request.method == 'GET':
-        return render_to_response('opsoperate.html', {'user': request.user})
+        return render_to_response('opsoperate.html', {'info': info,  'user': request.user})
     if request.method == 'POST':
         if request.POST['operate'] == 'git_pull':
             connect = ssh(str(info.Adderss))
