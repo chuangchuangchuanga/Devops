@@ -15,11 +15,11 @@ from .models import *
 def searchdomain(requests):
     if requests.method == 'GET':
         p = cloudflareinfo.objects.all()
-        return render_to_response('searchdomain.html', locals())
+        return render_to_response('searchdomain.html', {'p': p, 'user': requests.user})
     else:
         domain = requests.POST['domain']
         p = cloudflareinfo.objects.filter(domain__icontains=domain)
-        return render_to_response('searchdomain.html', locals())
+        return render_to_response('searchdomain.html', {'p': p, 'user': requests.user})
 
 
 @login_required
@@ -28,7 +28,7 @@ def cleancache(requests, id):
     info = cloudflareinfo.objects.get(id=id)
     if requests.method == 'GET':
         id = id
-        return render_to_response('cleancache.html', locals())
+        return render_to_response('cleancache.html', {'id': id, 'info': info,'user': requests.user})
     else:
         url = requests.POST['url']
         zone, auth_email, auth_key = info.zone_id, str(info.auth_email), str(info.auth_key)

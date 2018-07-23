@@ -18,11 +18,11 @@ from tools import ssh
 def ops_search_domain(request):
     if request.method == 'GET':
         p = domain_to_server.objects.all()
-        return render_to_response('opssearchdomain.html', locals())
+        return render_to_response('opssearchdomain.html', {'p': p, 'user': request.user})
     else:
         domain = request.POST['domain']
         p = domain_to_server.objects.filter(Domain__icontains=domain)
-        return render_to_response('opssearchdomain.html', locals())
+        return render_to_response('opssearchdomain.html', {'p': p, 'user': request.user})
 
 
 
@@ -31,7 +31,7 @@ def ops_search_domain(request):
 def ops_operate(request, id):
     info = domain_to_server.objects.get(id=id)
     if request.method == 'GET':
-        return render_to_response('opsoperate.html', locals())
+        return render_to_response('opsoperate.html', {'user': request.user})
     if request.method == 'POST':
         if request.POST['operate'] == 'git_pull':
             connect = ssh(str(info.Adderss))

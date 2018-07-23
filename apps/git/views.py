@@ -20,11 +20,11 @@ def index(requests):
 @csrf_exempt
 def develop(requests):
     if requests.method == 'GET':
-        return render_to_response('develop.html')
+        return render_to_response('develop.html', {'user': requests.user})
     else:
         domain = requests.POST['domain']
         p = ipadd_path.objects.filter(Domain__icontains=domain)
-        return render_to_response('develop.html', locals())
+        return render_to_response('develop.html', {'p': p, 'user': requests.user})
 
 
 @login_required
@@ -33,7 +33,7 @@ def ccshopissue(requests, id):
     info = ipadd_path.objects.get(id=id)
     path = "ccshop"
     if requests.method == 'GET':
-        return render_to_response('issue.html', locals())
+        return render_to_response('issue.html', {'user': requests.user})
     else:
         reset = requests.POST['reset']
         fun(info.Ipadd, info.Ccshoppath, reset)
@@ -46,7 +46,7 @@ def themes(requests, id):
     info = ipadd_path.objects.get(id=id)
     path = 'themes'
     if requests.method == 'GET':
-        return render_to_response('issue.html', locals())
+        return render_to_response('issue.html', {'user': requests.user})
     else:
         reset = requests.POST['reset']
         fun(info.Ipadd, info.Themespath, reset)
@@ -75,7 +75,7 @@ def login_site(requests):
         user = authenticate(username=username, password=password)
         if user.is_active:
             login(requests, user)
-            return HttpResponseRedirect('/')
+            return render_to_response('index.html',  {'user': requests.user})
         else:
             return render_to_response('login.html',{'login_err': 'Please recheck your username or password!'})
     return render_to_response('login.html')
