@@ -40,31 +40,107 @@ def ops_operate(request, id):
 
         elif request.POST['operate'] == 'git_reset_hard':
             git_reset_hard_value = request.POST['hard_code']
+            denyList = ["rm", 'refresh', 'reset', 'rollback']
+            for i in denyList:
+                if re.search(i, git_reset_hard_value) is not None:
+                    info = json.dumps("the option is disabled")
+                    return HttpResponse(info)
             connect = ssh(str(info.Adderss))
             info = json.dumps(connect.git_reset_hard(str(info.Path), git_reset_hard_value))
             return HttpResponse(info)
 
         elif request.POST['operate'] == 'php_artisan_option':
             php_artisan_option_value = request.POST['artisan_code']
-            allow_list = ["cache:clear", "system:clear_cache key union_fetch_product_token", "migrate", "pull-base-orders"]
-            if php_artisan_option_value in allow_list:
-                connect = ssh(str(info.Adderss))
-                info = json.dumps(connect.php_artisan_option(str(info.Path), php_artisan_option_value))
-                return HttpResponse(info)
-            else:
-                info = json.dumps("the option is disabled")
-                return HttpResponse(info)
+            denyList = ["rm", 'refresh', 'reset', 'rollback']
+            for i in denyList:
+                if re.search(i, php_artisan_option_value) is not None:
+                    info = json.dumps("the option is disabled")
+                    return HttpResponse(info)
+
+            connect = ssh(str(info.Adderss))
+            info = json.dumps(connect.php_artisan_option(str(info.Path), php_artisan_option_value))
+            return HttpResponse(info)
+
 
         elif request.POST['operate'] == 'npm_dev_option':
             npm_dev_option_value = request.POST['npm_code']
-            allow_list = ["dev", "production"]
-            if npm_dev_option_value in allow_list:
-                connect = ssh(str(info.Adderss))
-                info = json.dumps(connect.npm_dev_option(str(info.Path), npm_dev_option_value))
-                return HttpResponse(info)
-            else:
-                info = json.dumps("the option is disabled")
-                return HttpResponse(info)
+            denyList = ["rm", 'refresh', 'reset', 'rollback']
+            for i in denyList:
+                if re.search(i, npm_dev_option_value) is not None:
+                    info = json.dumps("the option is disabled")
+                    return HttpResponse(info)
+
+            connect = ssh(str(info.Adderss))
+            info = json.dumps(connect.npm_dev_option(str(info.Path), npm_dev_option_value))
+            return HttpResponse(info)
+
+
+        elif request.POST['operate'] == 'deamon_process_restart':
+            connect = ssh(str(info.Adderss))
+            info = json.dumps(connect.deamon_process_restart())
+            return HttpResponse(info)
+
+
+
+@login_required
+@csrf_exempt
+def test_ops_search_domain(request):
+    if request.method == 'GET':
+        p = test_domain_to_server.objects.all()
+        return render_to_response('testopssearchdomain.html', {'p': p, 'user': request.user})
+    else:
+        domain = request.POST['domain']
+        p = test_domain_to_server.objects.filter(Domain__icontains=domain)
+        return render_to_response('testopssearchdomain.html', {'p': p, 'user': request.user})
+
+
+@login_required
+@csrf_exempt
+def test_ops_operate(request, id):
+    info = test_domain_to_server.objects.get(id=id)
+    if request.method == 'GET':
+        return render_to_response('testopsoperate.html', {'info': info,  'user': request.user})
+    if request.method == 'POST':
+        if request.POST['operate'] == 'git_pull':
+            connect = ssh(str(info.Adderss))
+            info = json.dumps(connect.git_pull(str(info.Path)))
+            return HttpResponse(info)
+
+        elif request.POST['operate'] == 'git_reset_hard':
+            git_reset_hard_value = request.POST['hard_code']
+            denyList = ["rm", 'refresh', 'reset', 'rollback']
+            for i in denyList:
+                if re.search(i, git_reset_hard_value) is not None:
+                    info = json.dumps("the option is disabled")
+                    return HttpResponse(info)
+            connect = ssh(str(info.Adderss))
+            info = json.dumps(connect.git_reset_hard(str(info.Path), git_reset_hard_value))
+            return HttpResponse(info)
+
+        elif request.POST['operate'] == 'php_artisan_option':
+            php_artisan_option_value = request.POST['artisan_code']
+            denyList = ["rm", 'refresh', 'reset', 'rollback']
+            for i in denyList:
+                if re.search(i, php_artisan_option_value) is not None:
+                    info = json.dumps("the option is disabled")
+                    return HttpResponse(info)
+            connect = ssh(str(info.Adderss))
+            info = json.dumps(connect.php_artisan_option(str(info.Path), php_artisan_option_value))
+            return HttpResponse(info)
+
+
+        elif request.POST['operate'] == 'npm_dev_option':
+            npm_dev_option_value = request.POST['npm_code']
+            denyList = ["rm", 'refresh', 'reset', 'rollback']
+            for i in denyList:
+                if re.search(i, npm_dev_option_value) is not None:
+                    info = json.dumps("the option is disabled")
+                    return HttpResponse(info)
+
+
+            connect = ssh(str(info.Adderss))
+            info = json.dumps(connect.npm_dev_option(str(info.Path), npm_dev_option_value))
+            return HttpResponse(info)
 
         elif request.POST['operate'] == 'deamon_process_restart':
             connect = ssh(str(info.Adderss))

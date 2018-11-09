@@ -17,3 +17,18 @@ class domain_to_server(models.Model):
 
     def __unicode__(self):
         return self.Domain
+
+
+class test_domain_to_server(models.Model):
+    website_type = (
+        (0, u"october"),
+        (1, u"larval"),
+        (2, u"html")
+    )
+    Domain = models.CharField(max_length=50)
+    Adderss = models.GenericIPAddressField()
+    Path = models.CharField(max_length=200)
+    webtype = models.IntegerField( choices=website_type)
+
+    def __unicode__(self):
+        return self.Domain

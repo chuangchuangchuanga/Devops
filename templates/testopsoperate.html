@@ -1,0 +1,148 @@
+{% extends 'master/html.html' %}
+
+{% block content %}
+    <ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li class="active"><a>网站操作</a></li>
+    <li class="active"><a>{{ info.Domain }}</a></li>
+</ol>
+    <style>
+        .searchBox{margin-bottom: 40px;}
+        {#        #gitInput{display: inline-block;}#}
+        .right{background-color: #000;padding: 20px;overflow-y: scroll;width: 100%;height: 100%;}
+        .right .text-success{font-size: 16px;font-weight: 600;}
+        #alert_cover{
+            display: none;
+        }
+        #alert_cover .cover{
+            position: fixed;top: 0;
+            right:0;
+            width:40%;
+            height:100%;
+            background: #000;
+            opacity:.8;
+            z-index: 3;
+        }
+        #alert_cover .text{
+            position: fixed;
+            width:34%;
+            height:80vh;
+            right:3%;
+            overflow-y: scroll;
+            color: #fff;
+            font-size: 14px;
+            z-index: 4;
+        }
+        #alert_cover .text::-webkit-scrollbar {display:none}
+        .panel-body span{display: inline-block;width:80px;text-align: right;padding-right: 10px;}
+    </style>
+    <div id="alert_cover">
+        <div class="cover"></div>
+        <div class="text"></div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-9">
+            <div class="panel panel-default" style="width: 500px;">
+                <div class="panel-heading">git操作</div>
+                <div class="panel-body">
+                    <button  class="btn btn-primary" value="git"  id="git_pull" name="operate">更新远程仓库</button>
+                </div>
+                <div class="panel-body">
+                    <span>git reset</span> <input type="text" id="git_reset_hard_value" class="form-control" style="width: 300px;display: inline-block" placeholder="请输入回滚版本">
+                    <button class="btn btn-primary" id="git_reset">提交</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="panel panel-default" style="width: 500px;">
+                <div class="panel-heading">网站远程操作</div>
+                <div class="panel-body">
+                    <span>php artisan</span> <input type="text" class="form-control" style="width: 300px;display: inline-block" id="php_artisan_option_value">
+                    <button class="btn btn-primary" id="php_artisan_option" >提交</button>
+                </div>
+                <div class="panel-body">
+                    <span>npm run</span> <input type="text" class="form-control" style="width: 300px;display: inline-block" id="npm_dev_option_value">
+                    <button class="btn btn-primary"   id="npm_dev_option">提交</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="panel panel-default" style="width: 500px;">
+                <div class="panel-heading">队列操作</div>
+                <div class="panel-body">
+                        <button  class="btn btn-primary" id="deamon_process_restart"> 重启队列</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function abc(id, dict, that) {
+            $(that).attr("disabled","disabled");
+            $.ajax({
+                url:"/testopsoperate/" + id+ "/" ,
+                data:dict,
+                type: "POST",
+                dataType:"json",
+                success:function (res) {
+                    if(res && res != undefined){
+                         $("#alert_cover").show().find(".text").html(res)
+                    };
+                    $(that).removeAttr("disabled")
+                },
+                error:function (a, b) {
+                    console.log(b);
+                    $(that).removeAttr("disabled")
+                }
+            })
+        }
+
+        $("#git_pull").bind("click",function () {
+            var dict = {
+                operate:'git_pull',
+            };
+            abc({{ info.id }}, dict, this);
+        })
+
+        $('#git_reset').bind("click", function () {
+            var git_reset_hard_value = $('#git_reset_hard_value').val();
+            var dict = {
+                operate:'git_reset_hard',
+                hard_code:git_reset_hard_value
+            };
+            abc({{ info.id }}, dict, this)
+        })
+
+        $('#php_artisan_option').bind("click", function () {
+            var php_artisan_option_value = $('#php_artisan_option_value').val();
+            var dict = {
+                operate:'php_artisan_option',
+                artisan_code:php_artisan_option_value
+            };
+            abc({{ info.id }}, dict, this)
+        })
+
+        $('#npm_dev_option').bind("click", function () {
+            var npm_dev_option_value = $('#npm_dev_option_value').val();
+            var dict = {
+                operate:'npm_dev_option',
+                npm_code:npm_dev_option_value
+            };
+            abc({{ info.id }}, dict, this)
+        })
+
+        $('#deamon_process_restart').bind('click', function () {
+            var dict = {
+                operate:'deamon_process_restart',
+            }
+            abc({{ info.id }}, dict, this)
+        })
+        $("#alert_cover").click(function () {
+            $("#alert_cover").hide()
+        })
+    </script>
+{% endblock %}

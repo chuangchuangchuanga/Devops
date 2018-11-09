@@ -32,4 +32,6 @@ urlpatterns = [
     url(r'^cleancache/(?P<id>[0-9]+)/$', cleancache_view.cleancache, name='cleancache'),
     url(r'^opssearchdomain/$', ops_view.ops_search_domain, name='opssearchdomain'),
     url(r'^ops_operate/(?P<id>[0-9]+)/$', ops_view.ops_operate, name='aaa'),
+    url(r'^testopssearchdomain/$', ops_view.test_ops_search_domain, name='testopssearchdomain'),
+    url(r'^testopsoperate/(?P<id>[0-9]+)/$', ops_view.test_ops_operate, name='testopsoperate'),
 ]

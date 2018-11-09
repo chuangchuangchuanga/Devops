@@ -6,6 +6,8 @@
     <link rel="icon" href="/favicon.ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://v3.bootcss.com/examples/dashboard/dashboard.css">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static  'css/css.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -37,7 +39,18 @@
         <div class="col-sm-3 col-md-2 sidebar" style="float:left;">
           <ul class="nav nav-sidebar">
             <li><a href="{% url 'searchdomain' %}">清除缓存</a></li>
-            <li><a href="{% url 'opssearchdomain' %}">网站操作</a></li>
+            <li>
+                <a href="#">网站操作</a>
+                <ul class="nav nav-sidebar child-ul">
+                    <li>
+                        <a href="{% url 'testopssearchdomain' %}">Testing</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'opssearchdomain' %}">Formal</a>
+                    </li>
+                </ul>
+            </li>
+
           </ul>
         </div>
         <div class="col-md-10" >
