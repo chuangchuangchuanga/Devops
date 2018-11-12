@@ -36,6 +36,8 @@ def ops_operate(request, id):
         if request.POST['operate'] == 'git_pull':
             connect = ssh(str(info.Adderss))
             info = json.dumps(connect.git_pull(str(info.Path)))
+            if id == '2':
+                connect.pl_queue_git_pull()
             return HttpResponse(info)
 
         elif request.POST['operate'] == 'git_reset_hard':
@@ -78,6 +80,8 @@ def ops_operate(request, id):
         elif request.POST['operate'] == 'deamon_process_restart':
             connect = ssh(str(info.Adderss))
             info = json.dumps(connect.deamon_process_restart())
+            if id == '2':
+                connect.pl_queue_deamon_process_restart()
             return HttpResponse(info)
 
 

@@ -81,7 +81,6 @@ class ssh:
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(hostname=self.host, username=self.user, pkey=self.private_key)
         stdin, stdout, stderr = ssh.exec_command('cd {0}; /usr/local/node/bin/npm run {1}'.format(dir, npm_dev_option_value), timeout=30)
-        print stdout.read
         if stdout.read:
             result = re.sub(r'\n', '<br>', stdout.read())
             ssh.close()
@@ -91,3 +90,38 @@ class ssh:
             result = re.sub(r'\n', '<br>', stderr.read())
             ssh.close()
             return result
+
+    def pl_queue_git_pull(self):
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname='47.91.165.145', username='root', pkey=self.private_key)
+        stdin, stdout, stderr = ssh.exec_command('cd /home/pl/wwwroot/; git pull', timeout=30)
+        if stdout.read:
+            result = re.sub(r'\n', '<br>', stdout.read())
+            ssh.close()
+            result
+            return
+        else:
+            result = re.sub(r'\n', '<br>', stderr.read())
+            ssh.close()
+            result
+            return
+
+    def pl_queue_deamon_process_restart(self):
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname='47.91.165.145', username='root', pkey=self.private_key)
+        stdin, stdout, stderr = ssh.exec_command('supervisorctl restart all', timeout=30)
+        if stdout.read:
+            result = re.sub(r'\n', '<br>', stdout.read())
+            ssh.close()
+            result
+            return
+        else:
+            result = re.sub(r'\n', '<br>', stderr.read())
+            ssh.close()
+            result
+            return
+
+
+
