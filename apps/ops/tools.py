@@ -132,7 +132,28 @@ class ssh:
         ssh.close()
         result
 
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname='47.75.17.31', username='root', pkey=self.private_key)
+        stdin, stdout, stderr = ssh.exec_command('supervisorctl restart all', timeout=30)
+        result = re.sub(r'\n', '<br>', stdout.read())
+        ssh.close()
+        result
 
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname='47.75.28.199', username='root', pkey=self.private_key)
+        stdin, stdout, stderr = ssh.exec_command('supervisorctl restart all', timeout=30)
+        result = re.sub(r'\n', '<br>', stdout.read())
+        ssh.close()
+        result
 
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh.connect(hostname='47.52.39.172', username='root', pkey=self.private_key)
+        stdin, stdout, stderr = ssh.exec_command('supervisorctl restart all', timeout=30)
+        result = re.sub(r'\n', '<br>', stdout.read())
+        ssh.close()
+        result
 
 
