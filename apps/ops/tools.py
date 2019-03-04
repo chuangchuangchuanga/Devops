@@ -23,12 +23,12 @@ class ssh:
         if stdout.read:
             result = re.sub(r'\n', '<br>', stdout.read())
             ssh.close()
-            print stdout.readlines()
+            print result
             return result
         else:
             result = re.sub(r'\n', '<br>', stderr.read())
             ssh.close()
-            print stderr.readlines()
+            print result
             return result
 
 
