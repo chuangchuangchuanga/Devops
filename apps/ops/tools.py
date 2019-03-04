@@ -100,11 +100,13 @@ class ssh:
             result = re.sub(r'\n', '<br>', stdout.read())
             ssh.close()
             result
+            print stdout.readlines()
             return
         else:
             result = re.sub(r'\n', '<br>', stderr.read())
             ssh.close()
             result
+            print stderr.readlines()
             return
 
     def pl_queue_deamon_process_restart(self):
